@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model StudioConfig {
+  id              String   @id @default("default")
+  name            String   @default("SGX Detailing")
+  shortName       String   @default("SGX")
+  tagline         String   @default("Детейлинг, который возвращает кузову глубину, а салону — чистоту")
+  phone           String   @default("+7 (999) 000-00-00")
+  address         String   @default("Москва, Примерная улица, 12")
+  boxesCount      Int      @default(3)
+  workStartHour   Int      @default(9)
+  workEndHour     Int      @default(20)
+  heroImage       String
+  logoType        String   @default("bars")
+  logoLetter      String   @default("S")
+  logoColor       String   @default("#4F7DF3")
+  closedDates     String[]
+  updatedAt       DateTime @updatedAt
+}
+
+model ServiceItem {
+  id            String    @id @default(uuid())
+  title         String
+  description   String
+  durationHours Int
+  price         Int
+  pricePrefix   Boolean   @default(false)
+  category      String
+  Bookings      Booking[]
+}
+
+model PortfolioItem {
+  id       String @id @default(uuid())
+  title    String
+  category String
+  imageUrl String
+}
+
+model Booking {
+  id          String      @id @default(uuid())
+  serviceId   String
+  service     ServiceItem @relation(fields: [serviceId], references: [id])
+  date        String
+  startHour   Int
+  endHour     Int
+  boxNumber   Int
+  clientName  String
+  clientPhone String
+  clientEmail String?
+  carModel    String
+  status      String      @default("confirmed")
+  price       Int
+  createdAt   DateTime    @default(now())
+}
