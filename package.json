@@ -10,7 +10,7 @@
     "build": "npx tsc && npx vite build",
     "preview": "vite preview",
     "start": "node --import tsx server/index.ts",
-    "test": "vitest run"
+    "test": "vitest run",
   }
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
