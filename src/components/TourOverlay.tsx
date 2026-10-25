@@ -8,24 +8,30 @@ export const TourOverlay: React.FC = () => {
   useEffect(() => {
     if (!isActive || !steps[currentStep]) return;
 
-    // Ищем элемент с небольшой задержкой, чтобы DOM успел обновиться после смены страницы
     const updatePosition = () => {
       const targetElement = document.getElementById(steps[currentStep].targetId);
       if (targetElement) {
+        // Плавно скроллим к элементу, чтобы он был по центру экрана
         targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
         const rect = targetElement.getBoundingClientRect();
+        
+        // Оверлей имеет position: fixed, поэтому координаты берем прямо из viewport 
+        // (без прибавления window.scrollY)
         setTargetStyle({
-          top: rect.top - 8 + window.scrollY,
-          left: rect.left - 8 + window.scrollX,
+          top: rect.top - 8,
+          left: rect.left - 8,
           width: rect.width + 16,
           height: rect.height + 16,
         });
       }
     };
 
-    const timer = setTimeout(updatePosition, 100); // Даем компонентам отрендериться
+    // Даем 300мс, чтобы новая страница точно успела отрендериться перед поиском элемента
+    const timer = setTimeout(updatePosition, 300);
+    
     window.addEventListener('resize', updatePosition);
-    window.addEventListener('scroll', updatePosition);
+    window.addEventListener('scroll', updatePosition, { passive: true });
     
     return () => {
       clearTimeout(timer);
@@ -41,20 +47,18 @@ export const TourOverlay: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-[9999] pointer-events-none">
+      {/* Затемняющий фон */}
       <div className="absolute inset-0 bg-[#0B0D10]/80 backdrop-blur-sm pointer-events-auto transition-opacity duration-300" />
       
+      {/* Подсвеченная область (рамка) вокруг элемента */}
       <div 
-        className="absolute bg-transparent border-2 border-[#4F7DF3] rounded-3xl shadow-[0_0_0_9999px_rgba(0,0,0,0.4)] pointer-events-none transition-all duration-500 ease-in-out"
+        className="absolute bg-transparent border-2 border-[#4F7DF3] rounded-[28px] shadow-[0_0_0_9999px_rgba(0,0,0,0.6)] pointer-events-none transition-all duration-500 ease-out"
         style={targetStyle}
       />
 
+      {/* Окно с подсказкой — теперь жестко зафиксировано внизу экрана */}
       <div 
-        className="absolute z-50 bg-[#13161B] border border-white/[0.08] p-5 rounded-[24px] shadow-2xl w-[90%] max-w-[320px] pointer-events-auto transition-all duration-500 ease-in-out"
-        style={{
-          top: (targetStyle.top ? (targetStyle.top as number) + (targetStyle.height as number) + 16 : '50%'),
-          left: '50%',
-          transform: 'translateX(-50%)' // Центрируем подсказку по горизонтали для мобилок
-        }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#13161B] border border-white/[0.1] p-5 rounded-[24px] shadow-2xl w-[90%] max-w-[340px] pointer-events-auto transition-transform duration-500 ease-in-out"
       >
         <div className="text-[10px] font-bold text-[#4F7DF3] uppercase tracking-wider mb-1">
           Шаг {currentStep + 1} из {steps.length}
@@ -63,6 +67,7 @@ export const TourOverlay: React.FC = () => {
         <p className="text-[#8E95A5] text-xs mb-5 leading-relaxed">
           {current.content}
         </p>
+        
         <div className="flex justify-between items-center gap-3">
           <button 
             onClick={stopTour}
@@ -72,7 +77,7 @@ export const TourOverlay: React.FC = () => {
           </button>
           <button 
             onClick={nextStep}
-            className="flex-1 bg-[#4F7DF3] hover:bg-[#3B68DF] text-white text-xs py-2.5 rounded-xl font-semibold shadow-lg shadow-[#4F7DF3]/20 transition-all"
+            className="flex-1 bg-[#4F7DF3] hover:bg-[#3B68DF] text-white text-xs py-3 rounded-xl font-semibold shadow-lg shadow-[#4F7DF3]/20 transition-all"
           >
             {isLast ? 'Завершить тур' : 'Дальше'}
           </button>
