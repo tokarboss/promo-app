@@ -10,7 +10,7 @@ export const BrandLogo: React.FC<{ size?: 'sm' | 'md' }> = ({ size = 'sm' }) => 
   if (config.logoType === 'letter') {
     return (
       <div
-        className={`${dim} rounded-xl flex items-center justify-center font-bold text-white shadow-sm`}
+        className={`${dim} rounded-xl flex items-center justify-center font-bold text-white shadow-sm shrink-0`}
         style={{ backgroundColor: config.logoColor || '#4F7DF3' }}
       >
         {config.logoLetter || 'P'}
@@ -19,7 +19,7 @@ export const BrandLogo: React.FC<{ size?: 'sm' | 'md' }> = ({ size = 'sm' }) => 
   }
 
   return (
-    <div className={`${dim} rounded-xl bg-[#161920] border border-white/10 flex items-center justify-center p-1.5`}>
+    <div className={`${dim} rounded-xl bg-[#161920] border border-white/10 flex items-center justify-center p-1.5 shrink-0`}>
       <svg viewBox="0 0 36 28" className="w-full h-full" fill="none">
         <rect x="8" y="2" width="24" height="5" rx="2" fill="#FFFFFF" />
         <rect x="4" y="11" width="24" height="5" rx="2" fill="#4F7DF3" />
@@ -34,18 +34,17 @@ export const Header: React.FC = () => {
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-30 w-full bg-[#0B0D10]/85 backdrop-blur-xl border-b border-white/[0.06]">
-      {/* Жестко ограничиваем ширину и задаем отступы (w-full px-4) */}
-      <div className="max-w-md mx-auto w-full px-4 h-14 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3 group">
+    <header className="sticky top-0 z-30 w-full bg-[#0B0D10]/85 backdrop-blur-xl border-b border-white/[0.06] pt-[env(safe-area-inset-top)] pb-2">
+      <div className="max-w-md mx-auto w-full px-5 flex items-center justify-between mt-2 box-border">
+        
+        <Link to="/" className="flex items-center gap-3 group shrink-0">
           <BrandLogo size="sm" />
-          {/* Жестко прописываем PROMO, чтобы обойти кэш */}
           <span className="font-bold text-lg tracking-tight text-white group-hover:text-[#4F7DF3] transition-colors">
             PROMO
           </span>
         </Link>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3 shrink-0">
           {isOffline && (
             <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/15 text-amber-300 border border-amber-500/30">
               <WifiOff className="w-3.5 h-3.5" />
@@ -60,8 +59,8 @@ export const Header: React.FC = () => {
             <UserCircle2 className="w-5 h-5" />
           </Link>
         </div>
+
       </div>
     </header>
   );
 };
-
