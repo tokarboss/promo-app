@@ -13,7 +13,7 @@ export const BrandLogo: React.FC<{ size?: 'sm' | 'md' }> = ({ size = 'sm' }) => 
         className={`${dim} rounded-xl flex items-center justify-center font-bold text-white shadow-sm`}
         style={{ backgroundColor: config.logoColor || '#4F7DF3' }}
       >
-        {config.logoLetter || config.shortName.charAt(0)}
+        {config.logoLetter || 'P'}
       </div>
     );
   }
@@ -30,16 +30,18 @@ export const BrandLogo: React.FC<{ size?: 'sm' | 'md' }> = ({ size = 'sm' }) => 
 };
 
 export const Header: React.FC = () => {
-  const { config, isOffline } = useStudio();
+  const { isOffline } = useStudio();
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-30 bg-[#0B0D10]/85 backdrop-blur-xl border-b border-white/[0.06]">
-      <div className="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5 group">
+    <header className="sticky top-0 z-30 w-full bg-[#0B0D10]/85 backdrop-blur-xl border-b border-white/[0.06]">
+      {/* Жестко ограничиваем ширину и задаем отступы (w-full px-4) */}
+      <div className="max-w-md mx-auto w-full px-4 h-14 flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-3 group">
           <BrandLogo size="sm" />
-          <span className="font-bold text-base tracking-tight text-white group-hover:text-[#4F7DF3] transition-colors">
-            {config.shortName}
+          {/* Жестко прописываем PROMO, чтобы обойти кэш */}
+          <span className="font-bold text-lg tracking-tight text-white group-hover:text-[#4F7DF3] transition-colors">
+            PROMO
           </span>
         </Link>
 
@@ -53,7 +55,7 @@ export const Header: React.FC = () => {
           <Link
             to={location.pathname === '/profile' ? '/admin' : '/profile'}
             title="Профиль клиента и вход владельца"
-            className="w-9 h-9 rounded-full bg-[#13161B] border border-white/[0.08] flex items-center justify-center text-gray-300 hover:text-white hover:border-white/20 transition-all"
+            className="w-9 h-9 rounded-full bg-[#13161B] border border-white/[0.08] flex items-center justify-center text-gray-300 hover:text-white hover:border-white/20 transition-all shrink-0"
           >
             <UserCircle2 className="w-5 h-5" />
           </Link>
@@ -62,3 +64,4 @@ export const Header: React.FC = () => {
     </header>
   );
 };
+
