@@ -16,8 +16,7 @@ export const TourOverlay: React.FC = () => {
         
         const rect = targetElement.getBoundingClientRect();
         
-        // Оверлей имеет position: fixed, поэтому координаты берем прямо из viewport 
-        // (без прибавления window.scrollY)
+        // Координаты берем прямо из viewport (без прибавления window.scrollY)
         setTargetStyle({
           top: rect.top - 8,
           left: rect.left - 8,
@@ -47,16 +46,20 @@ export const TourOverlay: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-[9999] pointer-events-none">
-      {/* Затемняющий фон */}
-      <div className="absolute inset-0 bg-[#0B0D10]/80 backdrop-blur-sm pointer-events-auto transition-opacity duration-300" />
+      {/* Невидимый слой для блокировки кликов мимо элемента */}
+      <div className="absolute inset-0 pointer-events-auto" />
       
-      {/* Подсвеченная область (рамка) вокруг элемента */}
+      {/* 
+        Подсвеченная область (рамка) вокруг элемента.
+        Огромная тень (shadow-[0_0_0_9999px_...]) создает темный фон вокруг,
+        оставляя прозрачное "окно" точно над вашим элементом.
+      */}
       <div 
-        className="absolute bg-transparent border-2 border-[#4F7DF3] rounded-[28px] shadow-[0_0_0_9999px_rgba(0,0,0,0.6)] pointer-events-none transition-all duration-500 ease-out"
+        className="absolute bg-transparent border-2 border-[#4F7DF3] rounded-[24px] shadow-[0_0_0_9999px_rgba(11,13,16,0.85)] pointer-events-none transition-all duration-500 ease-out"
         style={targetStyle}
       />
 
-      {/* Окно с подсказкой — теперь жестко зафиксировано внизу экрана */}
+      {/* Окно с подсказкой — жестко зафиксировано внизу экрана */}
       <div 
         className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#13161B] border border-white/[0.1] p-5 rounded-[24px] shadow-2xl w-[90%] max-w-[340px] pointer-events-auto transition-transform duration-500 ease-in-out"
       >
