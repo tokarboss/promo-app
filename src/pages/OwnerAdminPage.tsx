@@ -233,8 +233,8 @@ export const OwnerAdminPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 3 карточки KPI: Заезды | Выполнено | Получено */}
-      <div className="grid grid-cols-3 gap-2.5">
+      {/* 3 карточки KPI: Заезды | Выполнено | Получено - ДОБАВЛЕН ID */}
+      <div id="tour-admin-kpi" className="grid grid-cols-3 gap-2.5">
         <div className="p-3.5 rounded-2xl bg-[#13161B] border border-white/[0.08]">
           <div className="text-[11px] text-[#8E95A5]">Заезды</div>
           <div className="text-xl font-bold text-white mt-1">{activeBookingsCount}</div>
@@ -251,8 +251,8 @@ export const OwnerAdminPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Сетка 8 кнопок быстрого управления студией как на 00:05:42 */}
-      <div className="grid grid-cols-2 gap-2.5">
+      {/* Сетка 8 кнопок быстрого управления студией - ДОБАВЛЕН ID */}
+      <div id="tour-admin-settings" className="grid grid-cols-2 gap-2.5">
         <button
           type="button"
           onClick={() => setAddBookingOpen(true)}

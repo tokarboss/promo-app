@@ -38,8 +38,8 @@ export const InstallGuidePage: React.FC = () => {
         <span>На главную</span>
       </Link>
 
-      {/* Карточка заголовка точно по кадру 00:05:18 */}
-      <div className="p-6 rounded-[28px] bg-[#13161B] border border-white/[0.08] space-y-4">
+      {/* ДОБАВЛЕН ID ДЛЯ ОБУЧЕНИЯ (tour-install-guide) */}
+      <div id="tour-install-guide" className="p-6 rounded-[28px] bg-[#13161B] border border-white/[0.08] space-y-4">
         <div className="flex items-center gap-3">
           <BrandLogo size="md" />
           <div>
