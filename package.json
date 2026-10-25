@@ -7,7 +7,7 @@
     "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\"",
     "dev:client": "vite",
     "dev:server": "tsx watch server/index.ts",
-    "build": "tsc && vite build",
+    "build": "npx tsc && npx vite build",,
     "preview": "vite preview",
     "start": "node --import tsx server/index.ts",
     "test": "vitest run"
