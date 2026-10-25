@@ -115,12 +115,12 @@ export const OwnerAdminPage: React.FC = () => {
     notifySaved(isDayClosed ? 'День открыт для онлайн-записи' : 'День закрыт для записи');
   };
 
-  // Быстрый пресет смены бренда (как в видеоролике: SGX / CarBase / TRIADA)
+  // Быстрый пресет смены бренда (как в видеоролике: PROMO / CarBase / TRIADA)
   const applyBrandPreset = async (preset: 'sgx' | 'carbase' | 'triada') => {
     if (preset === 'sgx') {
       await updateConfig({
-        name: 'SGX Detailing',
-        shortName: 'SGX',
+        name: 'PROMO Detailing',
+        shortName: 'PROMO',
         logoType: 'bars',
         logoLetter: 'S',
         logoColor: '#4F7DF3',
@@ -329,11 +329,11 @@ export const OwnerAdminPage: React.FC = () => {
         </button>
       </div>
 
-      {/* Быстрое переключение демо-вывесок из видео (00:06:34: CarBase / SGX / TRIADA) */}
+      {/* Быстрое переключение демо-вывесок из видео (00:06:34: CarBase / PROMO / TRIADA) */}
       <div className="p-4 rounded-2xl bg-[#13161B] border border-white/[0.07] space-y-2.5">
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold text-white">
-            Быстрая смена вывески (конвейер из видео)
+            Быстрая смена вывески
           </span>
           <button
             type="button"
@@ -353,7 +353,7 @@ export const OwnerAdminPage: React.FC = () => {
             onClick={() => applyBrandPreset('sgx')}
             className="py-2 px-2.5 rounded-xl bg-[#181C24] border border-white/10 text-xs font-medium text-white hover:border-[#4F7DF3]"
           >
-            SGX Detailing
+            PROMO Detailing
           </button>
           <button
             type="button"
@@ -814,7 +814,7 @@ export const OwnerAdminPage: React.FC = () => {
                         : 'bg-[#171A21] border-white/10 text-gray-400'
                     }`}
                   >
-                    Фирменные полосы SGX
+                    Фирменные полосы PROMO
                   </button>
                   <button
                     type="button"

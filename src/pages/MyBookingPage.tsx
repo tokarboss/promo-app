@@ -42,9 +42,9 @@ export const MyBookingPage: React.FC = () => {
     const icsContent = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
-      'PRODID:-//SGX Detailing//Booking//RU',
+      'PRODID:-//PROMO Detailing//Booking//RU',
       'BEGIN:VEVENT',
-      `UID:${b.id}@sgx.detailing`,
+      `UID:${b.id}@PROMO.detailing`,
       `DTSTART:${dtStart}`,
       `DTEND:${dtEnd}`,
       `SUMMARY:${b.serviceTitle} — ${config.name}`,

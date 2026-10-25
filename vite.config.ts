@@ -9,8 +9,8 @@ export default defineConfig({
       registerType: 'prompt',
       includeAssets: ['favicon.svg', 'icons/icon-192.svg', 'icons/icon-512.svg'],
       manifest: {
-        name: 'SGX Detailing — Запись в студию',
-        short_name: 'SGX',
+        name: 'PROMO Detailing — Запись в студию',
+        short_name: 'PROMO',
         description: 'Детейлинг, который возвращает кузову глубину, а салону — чистоту. Онлайн-запись за несколько касаний.',
         theme_color: '#0B0D10',
         background_color: '#0B0D10',
