@@ -7,11 +7,11 @@
     "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\"",
     "dev:client": "vite",
     "dev:server": "tsx watch server/index.ts",
-    "build": "npx tsc && npx vite build",,
+    "build": "npx tsc && npx vite build",
     "preview": "vite preview",
     "start": "node --import tsx server/index.ts",
     "test": "vitest run"
-  },
+  }
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@tanstack/react-query": "^5.56.2",
